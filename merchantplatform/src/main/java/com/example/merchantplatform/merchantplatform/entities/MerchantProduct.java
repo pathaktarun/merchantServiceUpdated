@@ -21,6 +21,6 @@ public class MerchantProduct {
     private String unit;
     private String quantity;
     private String price;
-    private String merchantId;
+    private String merchant_id;
     
 }

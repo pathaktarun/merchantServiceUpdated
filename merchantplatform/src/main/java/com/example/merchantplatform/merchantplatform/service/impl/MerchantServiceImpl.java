@@ -1,9 +1,12 @@
 package com.example.merchantplatform.merchantplatform.service.impl;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.merchantplatform.merchantplatform.controllers.merchantProduct;
 import com.example.merchantplatform.merchantplatform.entities.MerchantProduct;
 import com.example.merchantplatform.merchantplatform.payloads.ProductDetailsRequest;
 import com.example.merchantplatform.merchantplatform.payloads.ProductDetailsResponse;
@@ -30,6 +33,13 @@ public class MerchantServiceImpl implements MerchantService {
 
         return this.modelMapper.map(addedMerchantProduct,ProductDetailsResponse.class);
          
+    }
+
+    @Override
+    public List<ProductDetailsResponse> getMerchantProducts(String merchant_id)
+    {
+       List<merchantProduct> merchantProducts= productRepositories.findByColumnValue(merchant_id);
+        
     }
 
   

@@ -1,6 +1,8 @@
 package com.example.merchantplatform.merchantplatform.service.impl;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,15 @@ public class MerchantServiceImpl implements MerchantService {
     @Override
     public List<ProductDetailsResponse> getMerchantProducts(String merchant_id)
     {
-       List<merchantProduct> merchantProducts= productRepositories.findByColumnValue(merchant_id);
+       
+             List<MerchantProduct> merchantProducts= productRepositories.findByColumnValue(merchant_id);
+            merchantProducts.forEach(System.out::println);
+
+       List<ProductDetailsResponse> merchantProductsDtos=merchantProducts.stream().map(product->modelMapper.map(product,ProductDetailsResponse.class)).collect(Collectors.toList());
+       return merchantProductsDtos;
+
+        
+      
         
     }
 

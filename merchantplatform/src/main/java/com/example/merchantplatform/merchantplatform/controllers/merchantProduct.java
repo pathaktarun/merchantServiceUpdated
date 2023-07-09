@@ -43,12 +43,13 @@ public class merchantProduct {
     //Delete particular product corresponding to merchant_id
     @RequestMapping(value="/deleteProducts", method=RequestMethod.DELETE)
     public ResponseEntity<String> requestMethodName(@RequestParam String merchant_id) {
-          merchantService.deleteAllProducts(merchant_id);
-          return ResponseEntity.ok("Items delete for merchant_id: ${merchant_id} successfuly");
+       
+              merchantService.deleteAllProducts(merchant_id);
+          return ResponseEntity.ok("Items deleted for merchant_id: "+ merchant_id+" successfuly");
 
     }
 
-    
+
 
 
     

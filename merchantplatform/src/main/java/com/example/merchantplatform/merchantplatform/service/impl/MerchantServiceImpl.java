@@ -1,23 +1,24 @@
 package com.example.merchantplatform.merchantplatform.service.impl;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.merchantplatform.merchantplatform.controllers.merchantProduct;
 import com.example.merchantplatform.merchantplatform.entities.MerchantProduct;
 import com.example.merchantplatform.merchantplatform.payloads.ProductDetailsRequest;
 import com.example.merchantplatform.merchantplatform.payloads.ProductDetailsResponse;
 import com.example.merchantplatform.merchantplatform.repositories.ProductRepositories;
 import com.example.merchantplatform.merchantplatform.service.MerchantService;
 
+import jakarta.transaction.Transactional;
+
 
 
 @Service
+@Transactional
 public class MerchantServiceImpl implements MerchantService {
 
     @Autowired 
@@ -50,10 +51,12 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public void deleteAllProducts(String merchant_id)
+    public void deleteAllProducts(String merchant_id) 
     {
+    
            productRepositories.deleteByColumnValue(merchant_id);
            return;
+     
     }
 
   

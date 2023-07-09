@@ -17,4 +17,8 @@ public interface ProductRepositories extends JpaRepository<MerchantProduct,Integ
     @Query("Delete from MerchantProduct where merchant_id=:merchant_id")
     void deleteByColumnValue(@Param("merchant_id") String merchant_id);
 
+    @Modifying
+    @Query("Delete from MerchantProduct where id=:product_id")
+    void deleteByProductId(@Param("product_id") String product_id);
+
 }

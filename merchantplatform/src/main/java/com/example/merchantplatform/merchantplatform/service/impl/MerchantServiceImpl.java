@@ -59,6 +59,13 @@ public class MerchantServiceImpl implements MerchantService {
      
     }
 
+    @Override
+    public void deleteSingleProduct(String product_id)
+    {
+        productRepositories.deleteByProductId(product_id);
+        return;
+    }
+
   
     
 

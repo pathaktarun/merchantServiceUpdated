@@ -15,6 +15,8 @@ public interface MerchantService {
 
     public void deleteAllProducts(String merchant_id);
 
+    public void deleteSingleProduct(String product_id);
+
 
    
     

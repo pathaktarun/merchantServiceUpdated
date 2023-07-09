@@ -46,10 +46,14 @@ public class MerchantServiceImpl implements MerchantService {
 
        List<ProductDetailsResponse> merchantProductsDtos=merchantProducts.stream().map(product->modelMapper.map(product,ProductDetailsResponse.class)).collect(Collectors.toList());
        return merchantProductsDtos;
+   
+    }
 
-        
-      
-        
+    @Override
+    public void deleteAllProducts(String merchant_id)
+    {
+           productRepositories.deleteByColumnValue(merchant_id);
+           return;
     }
 
   

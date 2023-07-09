@@ -10,6 +10,10 @@ public interface MerchantService {
     public ProductDetailsResponse addProduct(ProductDetailsRequest productDetailsRequest);
 
     public List<ProductDetailsResponse> getMerchantProducts(String merchant_id);
+
+    public void deleteAllProducts(String merchant_id);
+
+
    
     
     

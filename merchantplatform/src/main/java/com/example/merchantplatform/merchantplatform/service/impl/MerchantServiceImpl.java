@@ -1,5 +1,8 @@
 package com.example.merchantplatform.merchantplatform.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +13,12 @@ import com.example.merchantplatform.merchantplatform.payloads.ProductDetailsResp
 import com.example.merchantplatform.merchantplatform.repositories.ProductRepositories;
 import com.example.merchantplatform.merchantplatform.service.MerchantService;
 
+import jakarta.transaction.Transactional;
+
 
 
 @Service
+@Transactional
 public class MerchantServiceImpl implements MerchantService {
 
     @Autowired 
@@ -30,6 +36,43 @@ public class MerchantServiceImpl implements MerchantService {
 
         return this.modelMapper.map(addedMerchantProduct,ProductDetailsResponse.class);
          
+    }
+
+    @Override
+    public List<ProductDetailsResponse> getMerchantProducts(String merchant_id)
+    {
+       
+             List<MerchantProduct> merchantProducts= productRepositories.findByColumnValue(merchant_id);
+            merchantProducts.forEach(System.out::println);
+
+       List<ProductDetailsResponse> merchantProductsDtos=merchantProducts.stream().map(product->modelMapper.map(product,ProductDetailsResponse.class)).collect(Collectors.toList());
+       return merchantProductsDtos;
+   
+    }
+
+    @Override
+    public void deleteAllProducts(String merchant_id) 
+    {
+    
+           productRepositories.deleteByColumnValue(merchant_id);
+           return;
+     
+    }
+
+    @Override
+    public void deleteSingleProduct(String product_id)
+    {
+        productRepositories.deleteByProductId(product_id);
+        return;
+    }
+
+    @Override
+    public ProductDetailsResponse updateSingleProduct(ProductDetailsRequest productDetailsRequestDto)
+    {
+         String id=productDetailsRequestDto.getId();
+         productRepositories.updateSingleProductUsingProductId(productDetailsRequestDto);
+         MerchantProduct updatedRecord=productRepositories.getSingleProductByProductId(id);
+         return modelMapper.map(updatedRecord,ProductDetailsResponse.class);  
     }
 
   

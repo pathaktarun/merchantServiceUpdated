@@ -15,12 +15,11 @@ public class MerchantProduct {
     
     @Id
     private int id;
-
     private String productName;
     private String category;
     private String unit;
     private String quantity;
     private String price;
-    private String merchantId;
+    private String merchant_id;
     
 }

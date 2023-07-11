@@ -1,5 +1,6 @@
 package com.example.merchantplatform.merchantplatform.controllers;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class merchantProduct {
 
     }
 
-    //Return products for a particular merchant
+    //Get products for a particular merchant
     @RequestMapping(path="/getProducts", method=RequestMethod.GET)
     public ResponseEntity<List<ProductDetailsResponse>> getProducts(@RequestParam("merchant_id") String merchant_id){
         List<ProductDetailsResponse> merchantProducts=merchantService.getMerchantProducts(merchant_id);
@@ -57,6 +58,19 @@ public class merchantProduct {
          return ResponseEntity.ok("Item deleted successfully with product_id:" + product_id);
 
     }
+
+    //Updating the single Product for a particular Merchant
+    @RequestMapping(value="/updateSingleProduct",method = RequestMethod.PATCH)
+    public ResponseEntity<ProductDetailsResponse> updateSingleProduct(@RequestBody ProductDetailsRequest productDetailsRequest)
+    {
+
+        ProductDetailsResponse updatedResponse=merchantService.updateSingleProduct(productDetailsRequest);
+        return ResponseEntity.ok(updatedResponse);
+
+
+    }
+
+
 
 
 

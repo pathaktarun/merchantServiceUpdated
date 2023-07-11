@@ -66,6 +66,15 @@ public class MerchantServiceImpl implements MerchantService {
         return;
     }
 
+    @Override
+    public ProductDetailsResponse updateSingleProduct(ProductDetailsRequest productDetailsRequestDto)
+    {
+         String id=productDetailsRequestDto.getId();
+         productRepositories.updateSingleProductUsingProductId(productDetailsRequestDto);
+         MerchantProduct updatedRecord=productRepositories.getSingleProductByProductId(id);
+         return modelMapper.map(updatedRecord,ProductDetailsResponse.class);  
+    }
+
   
     
 

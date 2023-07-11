@@ -15,7 +15,6 @@ public class MerchantProduct {
     
     @Id
     private int id;
-
     private String productName;
     private String category;
     private String unit;

@@ -17,6 +17,8 @@ public interface MerchantService {
 
     public void deleteSingleProduct(String product_id);
 
+    public ProductDetailsResponse updateSingleProduct(ProductDetailsRequest productDetailsRequest);
+
 
    
     
